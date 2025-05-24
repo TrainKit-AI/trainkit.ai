@@ -1,17 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { DropdownMenu } from '../../../../core/data/dropdown-menu.data';
 
 @Component({
   selector: 'app-dropdown',
-  imports: [CommonModule],
   templateUrl: './dropdown.component.html',
+  imports: [CommonModule],
   styleUrl: './dropdown.component.css',
 })
-export class DropdownComponent {
-  @Input()
-  DropdownMenu!: DropdownMenu;
+export class DropdownComponent implements OnInit {
+  @Input() DropdownMenu!: DropdownMenu;
   isExpanded: boolean = false;
+  isMobile: boolean = false;
+
+  ngOnInit() {
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768;
+    if (this.isMobile) {
+      this.isExpanded = true;
+    }
+  }
 
   show() {
     this.isExpanded = true;
@@ -19,5 +35,9 @@ export class DropdownComponent {
 
   hide() {
     this.isExpanded = false;
+  }
+
+  toggle() {
+    this.isExpanded = !this.isExpanded;
   }
 }
