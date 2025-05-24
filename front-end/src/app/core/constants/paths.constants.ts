@@ -9,3 +9,8 @@ export const LEGAL_PATHS = {
   cookie: 'legal/cookie',
   product: 'legal/product-terms',
 };
+
+export const AUTHENTICATION_PATHS = {
+  signIn: 'signin',
+  signUp: 'signup',
+};
