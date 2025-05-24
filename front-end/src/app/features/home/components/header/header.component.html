@@ -7,14 +7,31 @@
       height="30"
     />
   </a>
-  <ul class="nav-link">
-    <li>ABOUT US</li>
-    <li><app-dropdown [DropdownMenu]="Services"></app-dropdown></li>
-    <li>RESOURCES</li>
-  </ul>
 
-  <div class="auth-button">
-    <app-sign-in-button />
-    <app-sign-up-button />
+  <div class="nav-menu" [ngClass]="{ open: isMenuOpen }">
+    <ul class="nav-link">
+      <li>ABOUT US</li>
+      <li><app-dropdown [DropdownMenu]="Services"></app-dropdown></li>
+      <li>RESOURCES</li>
+    </ul>
+    <div class="auth-button">
+      <app-sign-in-button />
+      <app-sign-up-button />
+    </div>
   </div>
+
+  <button
+    class="nav-burger"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMenuOpen"
+  >
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <div
+    class="nav-overlay"
+    [ngClass]="{ open: isMenuOpen }"
+    (click)="toggleMenu()"
+  ></div>
 </div>
