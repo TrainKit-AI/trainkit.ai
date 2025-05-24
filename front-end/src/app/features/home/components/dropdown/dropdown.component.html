@@ -1,0 +1,25 @@
+<div class="dropdown-wrapper" (mouseenter)="show()" (mouseleave)="hide()">
+  <div class="dropdown-trigger">
+    {{ DropdownMenu.trigger }}
+    <span class="material-icons">
+      {{ isExpanded ? "expand_less" : "expand_more" }}
+    </span>
+  </div>
+
+  <div class="dropdown-menu" *ngIf="isExpanded">
+    <div class="dropdown-content" *ngFor="let content of DropdownMenu.content">
+      <span class="dropdown-title">{{ content.title }}</span>
+      <a
+        [href]="item.link"
+        class="dropdown-item"
+        *ngFor="let item of content.item"
+      >
+        <img [src]="item.icon" height="50" />
+        <div class="info">
+          <span class="title">{{ item.title }}</span>
+          <span class="description">{{ item.description }}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.sign-in-button {
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.sign-in-button:hover {
+  color: rgba(163, 163, 163, 1);
+}

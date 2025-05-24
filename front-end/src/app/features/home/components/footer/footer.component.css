@@ -1,0 +1,46 @@
+.footer {
+  margin-inline: 5rem;
+  padding: 2.5rem 5rem;
+  font-size: 0.875rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  border-top: 0.1rem solid #b6b6b6;
+  margin-top: 3rem;
+  padding: 1.5rem 0 3rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social-links path {
+  transition: fill 0.3s ease;
+  fill: black;
+}
+
+.social-links a:hover svg path {
+  fill: #b6b6b6;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 0.875rem;
+}
+
+li {
+  margin-bottom: 0.75rem;
+}
+
+nav ul li ul li:hover {
+  color: #b6b6b6;
+  cursor: pointer;
+}

@@ -1,0 +1,12 @@
+.sign-up-button {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.sign-up-button:hover {
+  background-image: linear-gradient(to bottom right, #004aad, #09cb7a);
+}
