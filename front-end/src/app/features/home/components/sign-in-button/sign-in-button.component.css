@@ -2,8 +2,20 @@
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  transition: color 0.2s ease;
 }
 
 .sign-in-button:hover {
   color: rgba(163, 163, 163, 1);
+}
+
+/* Styles responsive pour mobile */
+@media (max-width: 777px) {
+  .sign-in-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+  }
 }
