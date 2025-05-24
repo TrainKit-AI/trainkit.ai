@@ -5,8 +5,20 @@
   padding: 0.5rem 1rem;
   font-weight: 500;
   font-size: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  transition: background-image 0.2s ease;
 }
 
 .sign-up-button:hover {
   background-image: linear-gradient(to bottom right, #004aad, #09cb7a);
+}
+
+/* Styles responsive pour mobile */
+@media (max-width: 777px) {
+  .sign-up-button {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem 1rem;
+  }
 }
