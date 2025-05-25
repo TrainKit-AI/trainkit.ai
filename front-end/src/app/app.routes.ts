@@ -5,6 +5,7 @@ import {
   ROOT_PATHS,
 } from './core/constants/paths.constants';
 import { HomeComponent } from './features/home/pages/home/home.component';
+import { SigninComponent } from './features/signin/pages/signin/signin.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: AUTHENTICATION_PATHS.signIn,
-    component: HomeComponent,
+    component: SigninComponent,
   },
   {
     path: AUTHENTICATION_PATHS.signUp,
