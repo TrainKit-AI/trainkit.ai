@@ -3,11 +3,11 @@ import { RouterModule } from '@angular/router';
 import { AUTHENTICATION_PATHS } from '../../../../core/constants/paths.constants';
 
 @Component({
-  selector: 'app-sign-up-button',
+  selector: 'app-signup',
   imports: [RouterModule],
-  templateUrl: './sign-up-button.component.html',
-  styleUrl: './sign-up-button.component.css',
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.css',
 })
-export class SignUpButtonComponent {
-  signUpLink = AUTHENTICATION_PATHS.signUp;
+export class SignupComponent {
+  signInLink = AUTHENTICATION_PATHS.signIn;
 }

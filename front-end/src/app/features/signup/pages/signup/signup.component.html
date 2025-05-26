@@ -10,13 +10,32 @@
         />
       </a>
       <div class="signup-link">
-        Don't have an account?<a [routerLink]="['/', signUpLink]">Sign up</a>
+        Already have an account?
+        <a [routerLink]="['/', signInLink]">Log in</a>
       </div>
     </div>
-    <h1>Log in to your account</h1>
+    <h1>Create your account</h1>
     <form action="" class="signin-form">
       <div class="input-group">
         <span class="material-icons">person</span>
+        <input
+          name="firstName"
+          type="text"
+          placeholder="First Name"
+          class="input"
+        />
+      </div>
+      <div class="input-group">
+        <span class="material-icons">person</span>
+        <input
+          name="lastName"
+          type="text"
+          placeholder="Last Name"
+          class="input"
+        />
+      </div>
+      <div class="input-group">
+        <span class="material-icons">email</span>
         <input name="email" type="email" placeholder="Email" class="input" />
       </div>
       <div class="input-group">
@@ -28,10 +47,7 @@
           class="input"
         />
       </div>
-      <button type="submit" class="login-btn">Log In</button>
-      <div class="reset-password-link">
-        <a href="">Don't remember your password?</a>
-      </div>
+      <button type="submit" class="login-btn">Sign Up</button>
     </form>
   </div>
 </div>

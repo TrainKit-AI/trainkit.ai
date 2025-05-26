@@ -6,6 +6,7 @@ import {
 } from './core/constants/paths.constants';
 import { HomeComponent } from './features/home/pages/home/home.component';
 import { SigninComponent } from './features/signin/pages/signin/signin.component';
+import { SignupComponent } from './features/signup/pages/signup/signup.component';
 
 export const routes: Routes = [
   {
@@ -18,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: AUTHENTICATION_PATHS.signUp,
-    component: HomeComponent,
+    component: SignupComponent,
   },
   { path: ROOT_PATHS.error404, component: Error404Component },
   { path: '**', redirectTo: ROOT_PATHS.error404 },
