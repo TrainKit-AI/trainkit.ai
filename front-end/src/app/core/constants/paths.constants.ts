@@ -13,4 +13,5 @@ export const LEGAL_PATHS = {
 export const AUTHENTICATION_PATHS = {
   signIn: 'signin',
   signUp: 'signup',
+  dashboard: 'dashboard',
 };

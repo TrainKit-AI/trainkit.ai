@@ -14,39 +14,83 @@
         <a [routerLink]="['/', signInLink]">Log in</a>
       </div>
     </div>
+
     <h1>Create your account</h1>
-    <form action="" class="signin-form">
-      <div class="input-group">
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signin-form">
+      <div class="input-group" *ngIf="signupForm.get('firstName')">
         <span class="material-icons">person</span>
         <input
-          name="firstName"
-          type="text"
+          formControlName="firstName"
           placeholder="First Name"
           class="input"
         />
       </div>
-      <div class="input-group">
+      <div
+        class="error"
+        *ngIf="
+          signupForm.get('firstName')?.touched &&
+          signupForm.get('firstName')?.invalid
+        "
+      >
+        First name is required.
+      </div>
+
+      <div class="input-group" *ngIf="signupForm.get('lastName')">
         <span class="material-icons">person</span>
         <input
-          name="lastName"
-          type="text"
+          formControlName="lastName"
           placeholder="Last Name"
           class="input"
         />
       </div>
-      <div class="input-group">
-        <span class="material-icons">email</span>
-        <input name="email" type="email" placeholder="Email" class="input" />
+      <div
+        class="error"
+        *ngIf="
+          signupForm.get('lastName')?.touched &&
+          signupForm.get('lastName')?.invalid
+        "
+      >
+        Last name is required.
       </div>
-      <div class="input-group">
+
+      <div class="input-group" *ngIf="signupForm.get('email')">
+        <span class="material-icons">email</span>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+          class="input"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          signupForm.get('email')?.touched && signupForm.get('email')?.invalid
+        "
+      >
+        Valid email is required.
+      </div>
+
+      <div class="input-group" *ngIf="signupForm.get('password')">
         <span class="material-icons">lock</span>
         <input
-          name="password"
+          formControlName="password"
           type="password"
           placeholder="Password"
           class="input"
         />
       </div>
+      <div
+        class="error"
+        *ngIf="
+          signupForm.get('password')?.touched &&
+          signupForm.get('password')?.invalid
+        "
+      >
+        Password must be at least 6 characters.
+      </div>
+
       <button type="submit" class="login-btn">Sign Up</button>
     </form>
   </div>
