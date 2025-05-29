@@ -95,7 +95,12 @@
   font-size: 0.75rem;
   margin-top: -0.5rem;
   margin-bottom: 0.5rem;
-  padding-left: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.error-icon {
+  font-size: 18px;
 }
 
 h1 {

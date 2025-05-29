@@ -18,42 +18,6 @@
     <h1>Create your account</h1>
 
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signin-form">
-      <div class="input-group" *ngIf="signupForm.get('firstName')">
-        <span class="material-icons">person</span>
-        <input
-          formControlName="firstName"
-          placeholder="First Name"
-          class="input"
-        />
-      </div>
-      <div
-        class="error"
-        *ngIf="
-          signupForm.get('firstName')?.touched &&
-          signupForm.get('firstName')?.invalid
-        "
-      >
-        First name is required.
-      </div>
-
-      <div class="input-group" *ngIf="signupForm.get('lastName')">
-        <span class="material-icons">person</span>
-        <input
-          formControlName="lastName"
-          placeholder="Last Name"
-          class="input"
-        />
-      </div>
-      <div
-        class="error"
-        *ngIf="
-          signupForm.get('lastName')?.touched &&
-          signupForm.get('lastName')?.invalid
-        "
-      >
-        Last name is required.
-      </div>
-
       <div class="input-group" *ngIf="signupForm.get('email')">
         <span class="material-icons">email</span>
         <input
@@ -69,7 +33,8 @@
           signupForm.get('email')?.touched && signupForm.get('email')?.invalid
         "
       >
-        Valid email is required.
+        <div class="material-icons error-icon">warning</div>
+        Email cannot be blank
       </div>
 
       <div class="input-group" *ngIf="signupForm.get('password')">
@@ -88,7 +53,28 @@
           signupForm.get('password')?.invalid
         "
       >
-        Password must be at least 6 characters.
+        <div class="material-icons error-icon">warning</div>
+        Password cannot be blank
+      </div>
+
+      <div class="input-group" *ngIf="signupForm.get('username')">
+        <span class="material-icons">person</span>
+        <input
+          formControlName="username"
+          type="text"
+          placeholder="Username"
+          class="input"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          signupForm.get('username')?.touched &&
+          signupForm.get('username')?.invalid
+        "
+      >
+        <div class="material-icons error-icon">warning</div>
+        Username cannot be blank
       </div>
 
       <button type="submit" class="login-btn">Sign Up</button>
