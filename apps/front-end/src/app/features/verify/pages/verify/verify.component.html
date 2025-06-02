@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="form-container">
+    <div class="header">
+      <a href="" class="logo-container">
+        <img
+          src="assets/svg/trainkit-logo.svg"
+          class="trainkit-logo"
+          alt="trainkit-logo"
+          height="30"
+        />
+      </a>
+      <div class="signup-link">
+        <a [routerLink]="['/', signInLink]">Back to login</a>
+      </div>
+    </div>
+
+    <h1>Verifying your email</h1>
+    <p class="subtitle">A verification code has been sent to {{ email }}</p>
+
+    <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="signin-form">
+      <div class="input-group">
+        <span class="material-icons">pin</span>
+        <input
+          type="text"
+          formControlName="verificationCode"
+          placeholder="Verification Code"
+          class="input"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          verifyForm.get('verificationCode')?.invalid &&
+          verifyForm.get('verificationCode')?.touched
+        "
+      >
+        <div class="material-icons error-icon">warning</div>
+        The code must contain 6 digits
+      </div>
+      <div class="error" *ngIf="errorMessage">
+        <div class="material-icons error-icon">warning</div>
+        {{ errorMessage }}
+      </div>
+      <div class="success" *ngIf="successMessage">
+        <div class="material-icons success-icon">check_circle</div>
+        {{ successMessage }}
+      </div>
+      <button type="submit" class="verify-btn" [disabled]="verifyForm.invalid">
+        Verify
+      </button>
+
+      <div class="resend-code">
+        <a (click)="resendCode()" [class.disabled]="isResending">
+          {{ isResending ? "Sending..." : "Resend code" }}
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<p>dashboard works! You are logged in</p>
+
+<div *ngIf="user">
+  <p>Welcome, {{ user.username || user.email }}!</p>
+</div>
+
+<button (click)="logout()">Logout</button>

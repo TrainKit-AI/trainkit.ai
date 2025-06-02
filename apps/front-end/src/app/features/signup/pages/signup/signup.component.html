@@ -18,6 +18,11 @@
     <h1>Create your account</h1>
 
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signin-form">
+      <div class="error" *ngIf="errorMessage">
+        <div class="material-icons error-icon">warning</div>
+        {{ errorMessage }}
+      </div>
+
       <div class="input-group" *ngIf="signupForm.get('email')">
         <span class="material-icons">email</span>
         <input

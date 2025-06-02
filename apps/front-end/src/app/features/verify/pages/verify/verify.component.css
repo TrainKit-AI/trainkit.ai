@@ -33,19 +33,25 @@
   color: black;
   text-decoration: none;
   font-weight: 700;
-  margin-left: 0.25rem;
 }
 
 .signup-link a:hover {
   text-decoration: underline;
 }
 
-.reset-password-link {
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: #004aad;
+h1 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0 0 0.5rem;
   text-align: center;
-  padding: 1rem;
+  color: #333;
+}
+
+.subtitle {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
 }
 
 .signin-form {
@@ -62,6 +68,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
+  color: #666;
 }
 
 .signin-form .input {
@@ -73,17 +80,12 @@
   box-sizing: border-box;
 }
 
-.signin-form .input[name="email"]:focus {
+.signin-form .input:focus {
   outline: none;
   border-color: #004aad;
 }
 
-.signin-form .input[name="password"]:focus {
-  outline: none;
-  border-color: #09cb7a;
-}
-
-.signin-form .login-btn {
+.signin-form .verify-btn {
   width: 100%;
   height: 3rem;
   background-color: black;
@@ -96,20 +98,31 @@
   transition: background-color 0.3s ease;
 }
 
-.signin-form .login-btn:hover {
+.signin-form .verify-btn:hover {
   background-image: linear-gradient(to bottom right, #004aad, #09cb7a);
 }
 
-.signin-form .login-btn:active {
+.signin-form .verify-btn:active {
   background-image: linear-gradient(to bottom right, #004aad, #09cb7a);
 }
 
 .error {
-  color: red;
+  color: #dc3545;
   font-size: 0.75rem;
   margin-top: -0.5rem;
   margin-bottom: 0.5rem;
   display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.success {
+  color: #28a745;
+  font-size: 0.75rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
   gap: 0.25rem;
 }
 
@@ -117,12 +130,26 @@
   font-size: 18px;
 }
 
-h1 {
-  font-size: 1.25rem;
-  font-weight: normal;
-  margin: 0 0 1.5rem;
+.success-icon {
+  font-size: 16px;
+}
+
+.message-container {
+  min-height: 1.5rem;
   text-align: center;
-  color: #333;
+  margin-bottom: 1rem;
+}
+
+.resend-code {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #004aad;
+  text-align: center;
+  padding: 1rem;
+}
+
+.resend-code a {
+  cursor: pointer;
 }
 
 @media (max-width: 375px) {
@@ -133,14 +160,5 @@ h1 {
 
   .header {
     justify-content: space-between;
-  }
-
-  .signup-link {
-    font-size: 0;
-  }
-
-  .signup-link a {
-    font-size: 0.875rem;
-    margin-left: 0;
   }
 }

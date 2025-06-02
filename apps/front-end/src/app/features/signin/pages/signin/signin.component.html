@@ -14,23 +14,53 @@
       </div>
     </div>
     <h1>Log in to your account</h1>
-    <form action="" class="signin-form">
-      <div class="input-group">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signin-form">
+      <div class="input-group" *ngIf="loginForm.get('email')">
         <span class="material-icons">person</span>
-        <input name="email" type="email" placeholder="Email" class="input" />
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+          class="input"
+        />
       </div>
-      <div class="input-group">
+      <div
+        class="error"
+        *ngIf="
+          loginForm.get('email')?.touched && loginForm.get('email')?.invalid
+        "
+      >
+        <div class="material-icons error-icon">warning</div>
+        Email cannot be blank
+      </div>
+      <div class="input-group" *ngIf="loginForm.get('password')">
         <span class="material-icons">lock</span>
         <input
-          name="password"
+          formControlName="password"
           type="password"
           placeholder="Password"
           class="input"
         />
       </div>
+      <div
+        class="error"
+        *ngIf="
+          loginForm.get('password')?.touched &&
+          loginForm.get('password')?.invalid
+        "
+      >
+        <div class="material-icons error-icon">warning</div>
+        Password cannot be blank
+      </div>
+      <div class="error" *ngIf="errorMessage">
+        <div class="material-icons error-icon">warning</div>
+        {{ errorMessage }}
+      </div>
       <button type="submit" class="login-btn">Log In</button>
       <div class="reset-password-link">
-        <a href="">Don't remember your password?</a>
+        <a [routerLink]="['/', forgotPasswordLink]"
+          >Don't remember your password?</a
+        >
       </div>
     </form>
   </div>

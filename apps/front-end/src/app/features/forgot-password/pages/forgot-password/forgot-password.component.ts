@@ -11,45 +11,45 @@ import { AuthenticationService } from '../../../../core/auth/services/authentica
 import { AUTHENTICATION_PATHS } from '../../../../core/constants/paths.constants';
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css',
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.css',
 })
-export class SigninComponent {
-  signUpLink = AUTHENTICATION_PATHS.signUp;
-  dashboardLink = AUTHENTICATION_PATHS.dashboard;
-  forgotPasswordLink = AUTHENTICATION_PATHS.forgotPassword;
-  loginForm: FormGroup;
+export class ForgotPasswordComponent {
+  forgotForm: FormGroup;
   errorMessage: string | null = null;
+  successMessage: string | null = null;
+  readonly signInLink = AUTHENTICATION_PATHS.signIn;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private router: Router
   ) {
-    this.loginForm = this.fb.group({
+    this.forgotForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
     });
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
+    if (this.forgotForm.valid) {
       this.errorMessage = null;
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe({
-        next: (response) => {
-          if (response.token) {
-            this.router.navigate(['/', this.dashboardLink]);
-          } else {
-            this.errorMessage = response.message;
-          }
-        },
-      });
+      this.successMessage = null;
+
+      this.authService
+        .forgotPassword(this.forgotForm.get('email')?.value)
+        .subscribe({
+          next: (response) => {
+            this.successMessage = response.message;
+          },
+          error: (error) => {
+            this.errorMessage = error.error.message;
+          },
+        });
     } else {
-      this.loginForm.markAllAsTouched();
+      this.forgotForm.markAllAsTouched();
     }
   }
 }

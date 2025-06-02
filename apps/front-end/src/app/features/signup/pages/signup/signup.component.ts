@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { UserService } from '../../../../core/auth/services/user.service';
+import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 import { AUTHENTICATION_PATHS } from '../../../../core/constants/paths.constants';
 
 @Component({
@@ -17,31 +17,35 @@ import { AUTHENTICATION_PATHS } from '../../../../core/constants/paths.constants
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  private readonly dashboardLink = AUTHENTICATION_PATHS.dashboard;
+  readonly verifyLink = AUTHENTICATION_PATHS.verify;
   readonly signInLink = AUTHENTICATION_PATHS.signIn;
   signupForm: FormGroup;
+  errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private authService: AuthenticationService,
     private router: Router
   ) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
       username: ['', [Validators.required]],
     });
   }
 
   onSubmit(): void {
     if (this.signupForm.valid) {
-      this.userService.register(this.signupForm.value).subscribe({
-        next: (res: any) => {
-          console.log('Signup success:', res);
-          this.router.navigate(['/', this.dashboardLink]);
-        },
-        error: (err: any) => {
-          console.error('Signup error:', err);
+      this.errorMessage = null;
+      const { email, password, username } = this.signupForm.value;
+      this.authService.register(email, password, username).subscribe({
+        next: (response) => {
+          if (response.error) {
+            this.errorMessage = response.error;
+          } else {
+            localStorage.setItem('pendingVerificationEmail', email);
+            this.router.navigate(['/', this.verifyLink]);
+          }
         },
       });
     } else {
