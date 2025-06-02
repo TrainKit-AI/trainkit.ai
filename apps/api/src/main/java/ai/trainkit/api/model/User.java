@@ -30,6 +30,10 @@ public class User implements UserDetails {
     private String verificationCode;
     @Column(name = "verification_expiration")
     private LocalDateTime verificationExpiration;
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+    @Column(name = "reset_password_token_expiration")
+    private LocalDateTime resetPasswordTokenExpiration;
 
     public User() {
     }

@@ -41,21 +41,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
+        System.out.println("Processing request to: " + request.getRequestURI());
+        System.out.println("Authorization header: " + authHeader);
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("No valid Authorization header found");
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
             final String jwt = authHeader.substring(7);
-            final String userEmail = jwtService.extractUsername(jwt);
+            final String userEmail = jwtService.extractEmail(jwt);
+            System.out.println("JWT token found, extracted email: " + userEmail);
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if(userEmail != null && authentication == null) {
+            if (userEmail != null && authentication == null) {
+                System.out.println("Loading user details for email: " + userEmail);
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+                System.out.println("User details loaded: " + userDetails);
 
-                if(jwtService.isTokenValid(jwt, userDetails)) {
+                if (jwtService.isTokenValid(jwt, userDetails)) {
+                    System.out.println("Token is valid, creating authentication token");
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
                             null,
@@ -64,11 +72,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
+                    System.out.println("Authentication token set in SecurityContext");
+                } else {
+                    System.out.println("Token validation failed");
                 }
             }
 
             filterChain.doFilter(request, response);
         } catch (Exception e) {
+            System.out.println("Error processing JWT token: " + e.getMessage());
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
     }
