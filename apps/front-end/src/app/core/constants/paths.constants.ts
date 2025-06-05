@@ -10,6 +10,11 @@ export const LEGAL_PATHS = {
   product: 'legal/product-terms',
 };
 
+export const DASHBOARD_PATHS = {
+  dataset: 'dataset',
+  evaluation: 'evaluation',
+};
+
 export const AUTHENTICATION_PATHS = {
   signIn: 'signin',
   signUp: 'signup',

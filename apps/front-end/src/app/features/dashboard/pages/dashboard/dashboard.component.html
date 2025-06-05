@@ -1,7 +1,59 @@
-<p>dashboard works! You are logged in</p>
+<div class="dashboard-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-container">
+      <button class="menu-toggle" (click)="toggleSidebar()">
+        <span class="material-icons">menu</span>
+      </button>
+      <img
+        src="assets/svg/trainkit-logo.svg"
+        class="trainkit-logo"
+        alt="trainkit-logo"
+        height="30"
+      />
+    </div>
+    <div class="user-section">
+      <span class="username">{{ user?.username }}</span>
+      <button class="logout-button" (click)="logout()">
+        <span class="material-icons">logout</span>
+      </button>
+    </div>
+  </header>
 
-<div *ngIf="user">
-  <p>Welcome, {{ user.username || user.email }}!</p>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Sidebar -->
+    <aside class="sidebar" [class.open]="isSidebarOpen">
+      <nav>
+        <a
+          [routerLink]="[datasetPath]"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="material-icons">storage</span>
+          Data Management
+        </a>
+        <a
+          [routerLink]="[evaluationPath]"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="material-icons">analytics</span>
+          Data Evaluation
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Content area -->
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+
+  <!-- Overlay for mobile sidebar -->
+  <div
+    class="sidebar-overlay"
+    [class.open]="isSidebarOpen"
+    (click)="toggleSidebar()"
+  ></div>
 </div>
-
-<button (click)="logout()">Logout</button>

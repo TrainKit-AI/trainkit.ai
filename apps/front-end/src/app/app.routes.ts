@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Error404Component } from './core/components/error-404/error-404.component';
 import {
   AUTHENTICATION_PATHS,
+  DASHBOARD_PATHS,
   ROOT_PATHS,
 } from './core/constants/paths.constants';
 import { authGuard } from './core/guards/auth.guard';
@@ -40,6 +41,27 @@ export const routes: Routes = [
         (m) => m.DashboardComponent
       ),
     canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: DASHBOARD_PATHS.dataset,
+        pathMatch: 'full',
+      },
+      {
+        path: DASHBOARD_PATHS.dataset,
+        loadComponent: () =>
+          import(
+            './features/dashboard/pages/dataset-management/dataset-management.component'
+          ).then((m) => m.DatasetManagementComponent),
+      },
+      {
+        path: DASHBOARD_PATHS.evaluation,
+        loadComponent: () =>
+          import(
+            './features/dashboard/pages/data-evaluation/data-evaluation.component'
+          ).then((m) => m.DataEvaluationComponent),
+      },
+    ],
   },
   {
     path: AUTHENTICATION_PATHS.forgotPassword,
