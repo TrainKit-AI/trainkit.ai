@@ -11,8 +11,13 @@ HOST_AND_PORT="${URL_WITHOUT_PREFIX%%/*}"
 HOST="${HOST_AND_PORT%%:*}"
 PORT="${HOST_AND_PORT##*:}"
 
-# Résolution manuelle IPv4
-HOST_IPV4=$(getent ahostsv4 "$HOST" | awk '{ print $1; exit }')
+# Si dig est dispo, utiliser pour forcer IPv4
+if command -v dig > /dev/null; then
+  HOST_IPV4=$(dig +short A "$HOST" | head -n1)
+else
+  # fallback : utiliser le host tel quel (peut résoudre IPv6 aussi)
+  HOST_IPV4="$HOST"
+fi
 
 echo "Tentative de connexion avec :"
 echo "  Host: $HOST ($HOST_IPV4)"
