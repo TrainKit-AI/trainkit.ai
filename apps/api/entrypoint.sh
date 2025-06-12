@@ -23,7 +23,7 @@ echo "=> Test de connexion à la base de données..."
 ATTEMPTS=0
 MAX_ATTEMPTS=30
 
-while ! PGPASSWORD="$SPRING_DATASOURCE_PASSWORD" psql -h "$HOST" -p "5432" -U "$SPRING_DATASOURCE_USERNAME" -d "postgres" -c '\l'; do
+while ! PGPASSWORD="$SPRING_DATASOURCE_PASSWORD" psql -h "$HOST" -p "5432" -U "$SPRING_DATASOURCE_USERNAME" -d "postgres" --set=sslmode=require -4 -c '\l'; do
   ATTEMPTS=$((ATTEMPTS+1))
   if [ $ATTEMPTS -ge $MAX_ATTEMPTS ]; then
     echo "⚠️ Impossible de se connecter à la base après $MAX_ATTEMPTS essais, arrêt."
