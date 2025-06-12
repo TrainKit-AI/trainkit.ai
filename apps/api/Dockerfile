@@ -1,18 +1,15 @@
-FROM maven:3.9.4-eclipse-temurin-21 AS build
+FROM openjdk:21-jdk-slim
+
+# Installer psql
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY pom.xml .
-COPY src ./src
+COPY build/libs/app.jar app.jar
 
-RUN mvn clean package -DskipTests
+# Script de test + lancement de l'app
+COPY entrypoint.sh .
 
-FROM eclipse-temurin:21-jre-alpine
+RUN chmod +x entrypoint.sh
 
-WORKDIR /app
-
-COPY --from=build /app/target/trainkit-api-0.0.1-SNAPSHOT.jar ./app.jar
-
-EXPOSE 8080
-
-CMD ["java", "-Dserver.port=8080", "-jar", "app.jar"]
+ENTRYPOINT ["./entrypoint.sh"]
