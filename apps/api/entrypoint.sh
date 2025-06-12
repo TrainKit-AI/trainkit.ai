@@ -1,12 +1,14 @@
 #!/bin/sh
 set -e
 
+# Construire l'URL psql à partir des variables Render
+PSQL_URL="postgresql://${SPRING_DATASOURCE_USERNAME}:${SPRING_DATASOURCE_PASSWORD}@${SPRING_DATASOURCE_URL}:5432/postgres"
+
 echo "=> Test de connexion à la base de données..."
 
-# On attend que la base soit accessible (timeout 30s)
 ATTEMPTS=0
 MAX_ATTEMPTS=30
-while ! psql "$SPRING_DATASOURCE_URL" -c '\l' > /dev/null 2>&1; do
+while ! psql "$PSQL_URL" -c '\l' > /dev/null 2>&1; do
   ATTEMPTS=$((ATTEMPTS+1))
   if [ $ATTEMPTS -ge $MAX_ATTEMPTS ]; then
     echo "⚠️ Impossible de se connecter à la base après $MAX_ATTEMPTS essais, arrêt."
