@@ -10,11 +10,6 @@ export const LEGAL_PATHS = {
   product: 'legal/product-terms',
 };
 
-export const DASHBOARD_PATHS = {
-  dataset: 'dataset',
-  evaluation: 'evaluation',
-};
-
 export const AUTHENTICATION_PATHS = {
   signIn: 'signin',
   signUp: 'signup',
@@ -22,4 +17,20 @@ export const AUTHENTICATION_PATHS = {
   dashboard: 'dashboard',
   resetPassword: 'reset-password',
   forgotPassword: 'forgot-password',
-} as const;
+};
+
+export const DASHBOARD_PATHS = {
+  dataset: 'dataset',
+  evaluation: 'evaluation',
+};
+
+export const DATASET_PATH = {
+  home: '',
+  add: 'add',
+  edit: 'edit',
+  example: {
+    home: 'example',
+    add: 'add',
+    edit: 'edit',
+  },
+};

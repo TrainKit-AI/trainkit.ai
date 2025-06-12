@@ -76,6 +76,7 @@
   flex: 1;
   background-color: #f8f9fa;
   position: relative;
+  overflow: hidden;
 }
 
 /* Sidebar styles */
@@ -115,6 +116,11 @@
 .content {
   flex: 1;
   padding: 2rem;
+  overflow-y: auto;
+}
+
+.content > * {
+  max-width: 100%;
 }
 
 /* Sidebar overlay */

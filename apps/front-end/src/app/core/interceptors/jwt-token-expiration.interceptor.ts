@@ -21,6 +21,8 @@ export class TokenExpirationInterceptor implements HttpInterceptor {
 
     if (expiration && parseInt(expiration, 10) < now) {
       this.authService.logout();
+      localStorage.removeItem('jwtExpiration');
+      localStorage.removeItem('jwtToken');
       return throwError(() => new Error('Session expired'));
     }
 

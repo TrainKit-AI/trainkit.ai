@@ -1,0 +1,76 @@
+<p><a [routerLink]="['../../']">Home</a> > Edit dataset</p>
+<form
+  [formGroup]="editDatasetForm"
+  (ngSubmit)="onSubmit()"
+  class="edit-dataset-form"
+>
+  <div class="error" *ngIf="errorMessage">
+    <div class="material-icons error-icon">warning</div>
+    {{ errorMessage }}
+  </div>
+
+  <div class="input-group" *ngIf="editDatasetForm.get('name')">
+    <span class="material-symbols-outlined">id_card</span>
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="Name"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      editDatasetForm.get('name')?.touched &&
+      editDatasetForm.get('name')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Name cannot be blank
+  </div>
+
+  <div class="input-group" *ngIf="editDatasetForm.get('description')">
+    <span class="material-icons">description</span>
+    <input
+      formControlName="description"
+      type="text"
+      placeholder="Description"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      editDatasetForm.get('description')?.touched &&
+      editDatasetForm.get('description')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Description cannot be blank
+  </div>
+
+  <div class="input-group type-radio-group" *ngIf="editDatasetForm.get('type')">
+    <label *ngFor="let type of datasetTypes" class="radio-inline">
+      <input
+        type="radio"
+        formControlName="type"
+        [value]="type.value"
+        id="{{ type.value }}"
+      />
+      <span class="material-icons">{{ type.icon }}</span>
+      <span>{{ type.label }}</span>
+    </label>
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      editDatasetForm.get('type')?.touched &&
+      editDatasetForm.get('type')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Type cannot be blank
+  </div>
+
+  <button type="submit" class="login-btn">Update</button>
+</form>

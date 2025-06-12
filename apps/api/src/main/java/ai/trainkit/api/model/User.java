@@ -18,20 +18,28 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @Column(unique = true, nullable = false)
     private String username;
+
     @Column(unique = true, nullable = false)
     private String email;
+
     @Column(nullable = false)
     private String password;
+
     @Column(name = "enabled")
     private boolean enabled;
+
     @Column(name = "verification_code")
     private String verificationCode;
+
     @Column(name = "verification_expiration")
     private LocalDateTime verificationExpiration;
+
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
+
     @Column(name = "reset_password_token_expiration")
     private LocalDateTime resetPasswordTokenExpiration;
 

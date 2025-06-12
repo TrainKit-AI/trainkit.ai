@@ -1,0 +1,52 @@
+<p><a [routerLink]="['../../../']">Home</a> > Add an example</p>
+<form
+  [formGroup]="addExampleForm"
+  (ngSubmit)="onSubmit()"
+  class="add-example-form"
+>
+  <div class="error" *ngIf="errorMessage">
+    <div class="material-icons error-icon">warning</div>
+    {{ errorMessage }}
+  </div>
+
+  <div class="input-group" *ngIf="addExampleForm.get('data')">
+    <span class="material-icons">description</span>
+    <input
+      formControlName="data"
+      type="text"
+      placeholder="Data"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      addExampleForm.get('data')?.touched && addExampleForm.get('data')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Data cannot be blank
+  </div>
+
+  <div class="input-group" *ngIf="addExampleForm.get('label')">
+    <span class="material-icons">label</span>
+    <input
+      formControlName="label"
+      type="text"
+      placeholder="Label"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      addExampleForm.get('label')?.touched &&
+      addExampleForm.get('label')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Label cannot be blank
+  </div>
+
+  <button type="submit" class="add-example-btn">Add</button>
+</form>

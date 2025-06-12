@@ -3,6 +3,7 @@ import { Error404Component } from './core/components/error-404/error-404.compone
 import {
   AUTHENTICATION_PATHS,
   DASHBOARD_PATHS,
+  DATASET_PATH,
   ROOT_PATHS,
 } from './core/constants/paths.constants';
 import { authGuard } from './core/guards/auth.guard';
@@ -53,13 +54,50 @@ export const routes: Routes = [
           import(
             './features/dashboard/pages/dataset-management/dataset-management.component'
           ).then((m) => m.DatasetManagementComponent),
-      },
-      {
-        path: DASHBOARD_PATHS.evaluation,
-        loadComponent: () =>
-          import(
-            './features/dashboard/pages/data-evaluation/data-evaluation.component'
-          ).then((m) => m.DataEvaluationComponent),
+        children: [
+          {
+            path: DATASET_PATH.home,
+            loadComponent: () =>
+              import(
+                './features/dashboard/pages/dataset-management/pages/home/home.component'
+              ).then((m) => m.HomeComponent),
+          },
+          {
+            path: DATASET_PATH.add,
+            loadComponent: () =>
+              import(
+                './features/dashboard/pages/dataset-management/pages/add-dataset/add-dataset.component'
+              ).then((m) => m.AddDatasetComponent),
+          },
+          {
+            path: `:datasetId/${DATASET_PATH.edit}`,
+            loadComponent: () =>
+              import(
+                './features/dashboard/pages/dataset-management/pages/edit-dataset/edit-dataset.component'
+              ).then((m) => m.EditDatasetComponent),
+          },
+          {
+            path: ':datasetId',
+            loadComponent: () =>
+              import(
+                './features/dashboard/pages/dataset-management/pages/view-dataset/view-dataset.component'
+              ).then((m) => m.ViewDatasetComponent),
+          },
+          {
+            path: `:datasetId/${DATASET_PATH.example.home}/${DATASET_PATH.example.add}`,
+            loadComponent: () =>
+              import(
+                './features/dashboard/pages/dataset-management/pages/add-example/add-example.component'
+              ).then((m) => m.AddExampleComponent),
+          },
+          {
+            path: `:datasetId/${DATASET_PATH.example.home}/:exampleId/${DATASET_PATH.example.edit}`,
+            loadComponent: () =>
+              import(
+                './features/dashboard/pages/dataset-management/pages/edit-example/edit-example.component'
+              ).then((m) => m.EditExampleComponent),
+          },
+        ],
       },
     ],
   },

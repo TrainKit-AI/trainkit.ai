@@ -17,5 +17,18 @@ export const getEndpoints = () => {
       users: `${environment.apiBaseUrl}/users`,
       me: `${environment.apiBaseUrl}/users/me`,
     },
+    datasets: {
+      base: `${environment.apiBaseUrl}/datasets`,
+      export: (id: number) => `${environment.apiBaseUrl}/datasets/${id}/export`,
+      byId: (id: number) => `${environment.apiBaseUrl}/datasets/${id}`,
+    },
+    examples: {
+      base: `${environment.apiBaseUrl}/examples`,
+      byId: (id: number) => `${environment.apiBaseUrl}/examples/${id}`,
+      byDataset: (datasetId: number) =>
+        `${environment.apiBaseUrl}/examples/dataset/${datasetId}`,
+      createForDataset: (datasetId: number) =>
+        `${environment.apiBaseUrl}/examples/${datasetId}`,
+    },
   } as const;
 };

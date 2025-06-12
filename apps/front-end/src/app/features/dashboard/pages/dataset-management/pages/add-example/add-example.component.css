@@ -1,0 +1,63 @@
+.add-example-form {
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.input-group .material-icons {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.add-example-form .input {
+  height: 3rem;
+  font-size: 1rem;
+  padding: 0 1.5rem 0 3rem;
+  width: 100%;
+  border: 0.1rem solid #b6b6b6;
+  box-sizing: border-box;
+}
+
+.add-example-form .input:focus {
+  outline: none;
+  border-color: #004aad;
+}
+
+.add-example-form .add-example-btn {
+  width: 100%;
+  height: 3rem;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-example-form .add-example-btn:hover {
+  background-image: linear-gradient(to bottom right, #004aad, #09cb7a);
+}
+
+.add-example-form .add-example-btn:active {
+  background-image: linear-gradient(to bottom right, #004aad, #09cb7a);
+}
+
+.error {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.error-icon {
+  font-size: 18px;
+}

@@ -1,0 +1,88 @@
+<p>
+  <a [routerLink]="['../../../../']">Home</a> >
+  <a [routerLink]="['../../../']">{{ dataset?.name }}</a> > Edit Example
+</p>
+
+<form
+  [formGroup]="editExampleForm"
+  (ngSubmit)="onSubmit()"
+  class="edit-example-form"
+>
+  <div class="error" *ngIf="errorMessage">
+    <div class="material-icons error-icon">warning</div>
+    {{ errorMessage }}
+  </div>
+
+  <div class="input-group" *ngIf="editExampleForm.get('data')">
+    <span class="material-icons">description</span>
+    <input
+      formControlName="data"
+      type="text"
+      placeholder="Data"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      editExampleForm.get('data')?.touched &&
+      editExampleForm.get('data')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Data cannot be blank
+  </div>
+
+  <div class="input-group" *ngIf="editExampleForm.get('label')">
+    <span class="material-icons">label</span>
+    <input
+      formControlName="label"
+      type="text"
+      placeholder="Label"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      editExampleForm.get('label')?.touched &&
+      editExampleForm.get('label')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Label cannot be blank
+  </div>
+
+  <div
+    class="input-group type-radio-group"
+    *ngIf="editExampleForm.get('status')"
+  >
+    <label *ngFor="let status of exampleStatus" class="radio-inline">
+      <input
+        type="radio"
+        formControlName="status"
+        [value]="status.value"
+        id="{{ status.value }}"
+      />
+      <span
+        class="{{
+          status.symbol ? 'material-symbols-outlined' : 'material-icons'
+        }}"
+        >{{ status.icon }}</span
+      >
+      <span>{{ status.label }}</span>
+    </label>
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      editExampleForm.get('status')?.touched &&
+      editExampleForm.get('status')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Type must be TEXT or IMAGE
+  </div>
+
+  <button type="submit" class="edit-example-btn">Update</button>
+</form>

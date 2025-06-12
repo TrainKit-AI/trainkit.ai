@@ -1,0 +1,74 @@
+<p><a [routerLink]="['../']">Home</a> > Add a dataset</p>
+<form
+  [formGroup]="addDatasetForm"
+  (ngSubmit)="onSubmit()"
+  class="add-dataset-form"
+>
+  <div class="error" *ngIf="errorMessage">
+    <div class="material-icons error-icon">warning</div>
+    {{ errorMessage }}
+  </div>
+
+  <div class="input-group" *ngIf="addDatasetForm.get('name')">
+    <span class="material-symbols-outlined">id_card</span>
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="Name"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      addDatasetForm.get('name')?.touched && addDatasetForm.get('name')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Name cannot be blank
+  </div>
+
+  <div class="input-group" *ngIf="addDatasetForm.get('description')">
+    <span class="material-icons">description</span>
+    <input
+      formControlName="description"
+      type="text"
+      placeholder="Description"
+      class="input"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      addDatasetForm.get('description')?.touched &&
+      addDatasetForm.get('description')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Description cannot be blank
+  </div>
+
+  <div class="input-group type-radio-group" *ngIf="addDatasetForm.get('type')">
+    <label *ngFor="let type of datasetTypes" class="radio-inline">
+      <input
+        type="radio"
+        formControlName="type"
+        [value]="type.value"
+        id="{{ type.value }}"
+      />
+      <span class="material-icons">{{ type.icon }}</span>
+      <span>{{ type.label }}</span>
+    </label>
+  </div>
+  <div
+    class="error"
+    *ngIf="
+      addDatasetForm.get('type')?.touched && addDatasetForm.get('type')?.invalid
+    "
+  >
+    <div class="material-icons error-icon">warning</div>
+    Type must be TEXT or IMAGE
+  </div>
+
+  <button type="submit" class="login-btn">Add</button>
+</form>

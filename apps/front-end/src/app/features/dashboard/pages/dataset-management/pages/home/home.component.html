@@ -1,0 +1,58 @@
+<p>Home</p>
+<div class="table-container">
+  <div class="top-bar">
+    <a [routerLink]="[datasetPath.add]" class="add-dataset-btn">Add Dataset</a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Creation Date</th>
+        <th>Number of Examples</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="datasets.length === 0">
+        <td colspan="5" style="text-align: center">No Datasets</td>
+      </tr>
+      <tr *ngFor="let dataset of datasets">
+        <td>{{ dataset.name }}</td>
+        <td>{{ dataset.type }}</td>
+        <td>{{ dataset.createdAt }}</td>
+        <td>{{ dataset.examples.length | number }}</td>
+        <td class="actions">
+          <button [routerLink]="[dataset.id]" title="View Dataset">
+            <span class="material-icons">visibility</span>
+          </button>
+          <button
+            [routerLink]="[
+              dataset.id,
+              datasetPath.example.home,
+              datasetPath.example.add
+            ]"
+            title="Add Example"
+          >
+            <span class="material-icons">add_circle</span>
+          </button>
+          <button
+            [routerLink]="[dataset.id, datasetPath.edit]"
+            title="Edit Dataset"
+          >
+            <span class="material-icons">edit</span>
+          </button>
+          <button (click)="exportDataset(dataset.id)" title="Export Dataset">
+            <span class="material-icons">import_export</span>
+          </button>
+          <button (click)="deleteDataset(dataset.id)" title="Delete Dataset">
+            <span class="material-icons">delete</span>
+          </button>
+        </td>
+      </tr>
+      <ng-template *ngIf="datasets == []">
+        <p>No Datasets</p>
+      </ng-template>
+    </tbody>
+  </table>
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataEvaluationComponent } from './data-evaluation.component';
+import { AddExampleComponent } from './add-example.component';
 
-describe('DataEvaluationComponent', () => {
-  let component: DataEvaluationComponent;
-  let fixture: ComponentFixture<DataEvaluationComponent>;
+describe('AddExampleComponent', () => {
+  let component: AddExampleComponent;
+  let fixture: ComponentFixture<AddExampleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataEvaluationComponent]
+      imports: [AddExampleComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DataEvaluationComponent);
+    fixture = TestBed.createComponent(AddExampleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

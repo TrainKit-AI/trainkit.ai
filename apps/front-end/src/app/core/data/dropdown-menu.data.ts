@@ -12,17 +12,6 @@ export const SERVICES = {
         },
       ],
     },
-    {
-      title: 'Evaluating AI',
-      item: [
-        {
-          link: '',
-          icon: '/assets/svg/trainkit-evaluation-logo.svg',
-          title: 'TrainKit Evaluation',
-          description: 'Evaluation of AI models',
-        },
-      ],
-    },
   ],
 };
 

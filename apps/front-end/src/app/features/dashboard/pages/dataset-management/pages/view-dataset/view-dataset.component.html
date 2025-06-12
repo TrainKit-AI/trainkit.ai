@@ -1,0 +1,45 @@
+<p><a [routerLink]="['../../']">Home</a> > View Dataset</p>
+
+<div *ngIf="errorMessage" class="error">
+  <div class="material-icons error-icon">warning</div>
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="dataset">
+  <h2>Name : {{ dataset.name }}</h2>
+  <p>Description : {{ dataset.description }}</p>
+
+  <h3>{{ dataset.examples.length }} Examples:</h3>
+  <div *ngIf="dataset.examples.length > 0; else noExamples">
+    <div class="example-card" *ngFor="let example of dataset.examples">
+      <div class="card-icons">
+        <a
+          class="icon"
+          [routerLink]="[
+            datasetPath.example.home,
+            example.id,
+            datasetPath.example.edit
+          ]"
+          title="Edit Example"
+        >
+          <span class="material-icons">edit</span>
+        </a>
+        <a
+          class="icon"
+          (click)="deleteExample(example.id)"
+          title="Delete Example"
+        >
+          <span class="material-icons">delete</span>
+        </a>
+      </div>
+
+      <div><strong>Label:</strong> {{ example.label || "—" }}</div>
+      <div><strong>Status:</strong> {{ example.status }}</div>
+      <div><strong>Data:</strong> {{ example.data }}</div>
+    </div>
+  </div>
+
+  <ng-template #noExamples>
+    <p>No examples available for this dataset.</p>
+  </ng-template>
+</div>
