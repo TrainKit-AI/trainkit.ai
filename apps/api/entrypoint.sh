@@ -5,16 +5,18 @@ echo "SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME"
 echo "SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL"
 echo "SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD"
 
-# Extraire le host de la JDBC URL
 FULL_URL="$SPRING_DATASOURCE_URL"
 URL_WITHOUT_PREFIX="${FULL_URL#jdbc:postgresql://}"
-HOST="${URL_WITHOUT_PREFIX%%:*}"
+HOST_AND_PORT="${URL_WITHOUT_PREFIX%%/*}"
+HOST="${HOST_AND_PORT%%:*}"
+PORT="${HOST_AND_PORT##*:}"
 
-echo "HOST=$HOST"
+# Résolution manuelle IPv4
+HOST_IPV4=$(getent ahostsv4 "$HOST" | awk '{ print $1; exit }')
 
 echo "Tentative de connexion avec :"
-echo "  Host: $HOST"
-echo "  Port: 5432"
+echo "  Host: $HOST ($HOST_IPV4)"
+echo "  Port: $PORT"
 echo "  User: $SPRING_DATASOURCE_USERNAME"
 echo "  DB:   postgres"
 
@@ -22,8 +24,7 @@ echo "=> Test de connexion à la base de données..."
 
 ATTEMPTS=0
 MAX_ATTEMPTS=30
-
-while ! PGPASSWORD="$SPRING_DATASOURCE_PASSWORD" psql -h "$HOST" -p "5432" -U "$SPRING_DATASOURCE_USERNAME" -d "postgres" --set=sslmode=require -4 -c '\l'; do
+while ! PGPASSWORD="$SPRING_DATASOURCE_PASSWORD" psql -h "$HOST_IPV4" -p "$PORT" -U "$SPRING_DATASOURCE_USERNAME" -d "postgres" -c '\l' > /dev/null 2>&1; do
   ATTEMPTS=$((ATTEMPTS+1))
   if [ $ATTEMPTS -ge $MAX_ATTEMPTS ]; then
     echo "⚠️ Impossible de se connecter à la base après $MAX_ATTEMPTS essais, arrêt."
