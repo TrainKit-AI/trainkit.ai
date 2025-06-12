@@ -1,14 +1,21 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
-echo "⏳ Vérification de la connexion à la base de données..."
+echo "=> Test de connexion à la base de données..."
 
-# Tentative de connexion
-PGPASSWORD="$SPRING_DATASOURCE_PASSWORD" psql "$SPRING_DATASOURCE_URL" -U "$SPRING_DATASOURCE_USERNAME" -c '\dt' || {
-  echo "❌ Échec de connexion à la base PostgreSQL"
-  exit 1
-}
+# On attend que la base soit accessible (timeout 30s)
+ATTEMPTS=0
+MAX_ATTEMPTS=30
+while ! psql "$SPRING_DATASOURCE_URL" -c '\l' > /dev/null 2>&1; do
+  ATTEMPTS=$((ATTEMPTS+1))
+  if [ $ATTEMPTS -ge $MAX_ATTEMPTS ]; then
+    echo "⚠️ Impossible de se connecter à la base après $MAX_ATTEMPTS essais, arrêt."
+    exit 1
+  fi
+  echo "Attente de la base... tentative $ATTEMPTS/$MAX_ATTEMPTS"
+  sleep 1
+done
 
-echo "✅ Connexion à la base PostgreSQL réussie"
+echo "✅ Connexion réussie, lancement de l'application..."
 
-# Lancer l'application Spring Boot
-exec java -jar app.jar
+exec java -Dserver.port=8080 -jar app.jar

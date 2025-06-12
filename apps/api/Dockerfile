@@ -1,15 +1,23 @@
-FROM openjdk:21-jdk-slim
-
-# Installer psql
-RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-COPY build/libs/app.jar app.jar
+COPY pom.xml .
+COPY src ./src
 
-# Script de test + lancement de l'app
-COPY entrypoint.sh .
+RUN mvn clean package -DskipTests
 
-RUN chmod +x entrypoint.sh
+FROM eclipse-temurin:21-jre-alpine
+
+RUN apk update && apk add --no-cache postgresql-client bash
+
+WORKDIR /app
+
+COPY --from=build /app/target/trainkit-api-0.0.1-SNAPSHOT.jar ./app.jar
+COPY entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
+
+EXPOSE 8080
 
 ENTRYPOINT ["./entrypoint.sh"]
