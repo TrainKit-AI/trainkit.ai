@@ -7,13 +7,22 @@ import {
   ROOT_PATHS,
 } from './core/constants/paths.constants';
 import { authGuard } from './core/guards/auth.guard';
+import { AboutComponent } from './features/about/about.component';
 import { HomeComponent } from './features/home/pages/home/home.component';
+import { PrivacyComponent } from './features/privacy/privacy.component';
+import { TermsComponent } from './features/terms/terms.component';
+import { TrainkitDataEngineComponent } from './features/trainkit-data-engine/trainkit-data-engine.component';
 
 export const routes: Routes = [
   {
     path: ROOT_PATHS.home,
     component: HomeComponent,
   },
+  { path: 'trainkit-data-engine', component: TrainkitDataEngineComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'terms', component: TermsComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: '', component: HomeComponent },
   {
     path: AUTHENTICATION_PATHS.signIn,
     loadComponent: () =>
