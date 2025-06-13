@@ -5,7 +5,7 @@ export const SERVICES = {
       title: 'Building AI',
       item: [
         {
-          link: '',
+          link: '/trainkit-data-engine',
           icon: '/assets/svg/trainkit-data-engine-logo.svg',
           title: 'TrainKit Data Engine',
           description: 'Data for training models',
