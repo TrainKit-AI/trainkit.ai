@@ -18,11 +18,6 @@ export const routes: Routes = [
     path: ROOT_PATHS.home,
     component: HomeComponent,
   },
-  { path: 'trainkit-data-engine', component: TrainkitDataEngineComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'terms', component: TermsComponent },
-  { path: 'privacy', component: PrivacyComponent },
-  { path: '', component: HomeComponent },
   {
     path: AUTHENTICATION_PATHS.signIn,
     loadComponent: () =>
@@ -44,6 +39,10 @@ export const routes: Routes = [
         (m) => m.VerifyComponent
       ),
   },
+  { path: 'trainkit-data-engine', component: TrainkitDataEngineComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'terms', component: TermsComponent },
+  { path: 'privacy', component: PrivacyComponent },
   {
     path: AUTHENTICATION_PATHS.dashboard,
     loadComponent: () =>
